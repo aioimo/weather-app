@@ -10,10 +10,13 @@ import getWeather from './api'
 
 class App extends React.Component {
 
-  componentDidMount() {
-    getWeather()
+  fetchWeather = (e) => {
+    e.preventDefault()
+    const city = e.target.elements.city.value
+    const country = e.target.elements.country.value
+    getWeather(city, country)
     .then(res => {
-      console.log("res", res)
+      console.log("fetchWeather res", res)
     })
   }
 
@@ -21,7 +24,7 @@ class App extends React.Component {
     return (
       <div>
         <Titles/>
-        <Form/>
+        <Form fetchWeather={this.fetchWeather}/>
         <Weather/>
       </div>
     )
